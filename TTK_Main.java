@@ -22,57 +22,85 @@ public class TTK_Main {
     optionSelect = scan.next().toLowerCase();
   }
 
-  public static boolean optionCheck() {
-    boolean goodOption = true;
-    if(optionSelect.contains("login")){
-      if(currentUsername.equals("Guest")){
-        //if current name is guest that means you are not currently logged in
-        System.out.println("please enter your username.");
-        String tempUsername = scan.next();
-        if(TTK_Login.checkUsername(tempUsername, userList)) {                     //METODCALL FOR TTK_LOGIN HERE
-          //checks that the username exists in our userList and, if so, asks for the password)
-          System.out.println("please enter your password.");
-          String tempPassword = scan.next();
-          if(TTK_Login.logInUser(tempUsername, tempPassword, userList)) {         //METODCALL FOR TTK_LOGIN HERE
-            //login succeeded, printing welcome message.
-            welcomeLine();
-          } else {
-            //login failed due to wrong password
-            System.out.println("That was the wrong password. ");
-          }
+  public static boolean optionLogin() {
+    if(currentUsername.equals("Guest")){
+      //if current name is guest that means you are not currently logged in
+      System.out.println("please enter your username.");
+      String tempUsername = scan.next();
+      if(TTK_Login.checkUsername(tempUsername, userList)) {                     //METODCALL FOR TTK_LOGIN HERE
+        //checks that the username exists in our userList and, if so, asks for the password)
+        System.out.println("please enter your password.");
+        String tempPassword = scan.next();
+        if(TTK_Login.logInUser(tempUsername, tempPassword, userList)) {         //METODCALL FOR TTK_LOGIN HERE
+          //login succeeded, printing welcome message.
+          welcomeLine();
+          return true;
         } else {
-          //username does not exist in our userList
-          System.out.println("That username was not found in the database. ");
+          //login failed due to wrong password
+          System.out.println("That was the wrong password. ");
+          return false;
         }
       } else {
-        //if you got here, you are already logged in
-        System.out.println("You are already logged in. ")
+        //username does not exist in our userList
+        System.out.println("That username was not found in the database. ");
+        return false;
       }
+    } else {
+      //if you got here, you are already logged in
+      System.out.println("You are already logged in. ")
+      return false;
+    }
+  }
+
+  public static boolean optionLogout() {
+    currentUsername = "Guest";
+    System.out.println("You are now logged out");
+    welcomeLine();
+    return true;
+  }
+
+  public static boolean optionCreate() {
+    System.out.println("Please enter the new username: ");
+    String newUsername = scan.next();
+    if(!TTK_Create.checkUsername(newUsername, userList)) {                              //METHOD CALL FOR TTK_Create HERE
+      //checks that the user does not already exists
+      System.out.println("Please enter the new user's password");
+      String newPassword = scan.next();
+      if(TTK_Create.createUser(newUsername, newPassword, userList)) {                   //METHOD CALL FOR TTK_Create HERE
+        System.out.println("New user" + newUsername + "has been created!");
+        return true;
+      } else {
+        System.out.println("Sorry, for some reason we could not create the new user!");
+        return false;
+      }
+    } else {
+      System.out.println("Sorry, that username already exists. ");
+      return false;
+    }
+  }
+
+  public static boolean optionHandle() {
+    boolean goodOption = true;
+    boolean problemDidNotOccur = true;
+    if(optionSelect.contains("login")){
+      problemDidNotOccur = optionLogin();
     } else if (optionSelect.contains("logout")) {
-      currentUsername = "Guest";
-      System.out.println("You are now logged out");
-      welcomeLine();
+      problemDidNotOccur = optionLogout();
     } else if (optionSelect.contains("create")) {
-      System.out.println("Please enter the new username: ");
-      String newUsername = scan.next();
-      if(!TTK_Create.checkUsername(newUsername, userList)) {                              //METHOD CALL FOR TTK_Create HERE
-        //checks that the user does not already exists
-        System.out.println("Please enter the new user's password");
-        String newPassword = scan.next();
-        if(TTK_Create.createUser(newUsername, newPassword, userList)) {                   //METHOD CALL FOR TTK_Create HERE
-          System.out.println("New user" + newUsername + "has been created!");
-        } else {
-          System.out.println("Sorry, for some reason we could not create the new user!");
-        }
-      }
+        problemDidNotOccur = optionCreate();
     } else if (optionSelect.contains("quit" || optionSelect.contains("exit"))) {
       goLean = false;
+      problemDidNotOccur = true;
     } else {
       //go here if none of the accepted keywords were given by the user.
       goodOption = false;
       System.out.println("That was not one of the options available, please try again. ")
     }
-    return goodOption;
+    if(goodOption){
+      return problemDidNotOccur;
+    } else {
+      return false;
+    }
   }
 
   public static void main(String[] args) {
