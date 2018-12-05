@@ -36,7 +36,7 @@ public class TTK_Users {
 	boolean userNameInList = false;
 	for (int i = 0; i < userNameAndPasswordList.size(); i++){
 			
-        if (userNameAndPasswordList.get(i).getUsername()== "user name"){
+        if (userNameAndPasswordList.get(i).getUsername()== userInfo.getUsername()){
 	System.out.println("The User name " + userNameAndPasswordList.get(i).getUsername()+ " exists");
 	
 	userNameInList = true;
@@ -50,7 +50,7 @@ public class TTK_Users {
     public boolean doesPasswordInTheList(){
     	boolean paswordInList = false;
 	for (int i = 0; i < userNameAndPasswordList.size(); i++){
-	if (userNameAndPasswordList.get(i).getPassword() == "user password"){
+	if (userNameAndPasswordList.get(i).getPassword() == userInfo.password()){
 	paswordInList = true;
         }
         else{
