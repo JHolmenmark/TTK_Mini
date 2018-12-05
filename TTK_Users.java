@@ -18,13 +18,8 @@ public class TTK_Users {
     }
     
     public TTK_Users(String userName, String password){
-	this.userName = userInfo.getUserName();
-        this.password = userInfo.getPassWord();
-        userNameAndPasswordList.add(new TTK_User(userInfo.getUsername(), userInfo.getPassword()));
-        getUserName();
-        getPassword();
-        doesUserInTheList();
-        doesPasswordInTheList();
+	TTK_User newUser = new TTK_User(userName, password);
+        userNameAndPasswordList.add(new TTK_User(userName, password));
     }
     public String getUserName(){
         return this.userName;
@@ -36,7 +31,7 @@ public class TTK_Users {
 	boolean userNameInList = false;
 	for (int i = 0; i < userNameAndPasswordList.size(); i++){
 			
-        if (userNameAndPasswordList.get(i).getUsername()== userInfo.getUsername()){
+        if (userNameAndPasswordList.get(i).getUserName()== newUser.getUsername()){
 	System.out.println("The User name " + userNameAndPasswordList.get(i).getUsername()+ " exists");
 	
 	userNameInList = true;
