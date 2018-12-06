@@ -1,60 +1,65 @@
 
-package TTK_Project;
+package New_TTK_Project;
 
 import java.util.ArrayList;
 
-public class TTK_Users {
+public class TTK_Users{
     
-    private TTK_User userInfo = new TTK_User();
+    private String userName;
+    private String password;
     
-    private String userName ;
-    private String lastName;
-    private String password ;
-   // private TTK_Create userList = new TTK_Create(userName, password);
-    private ArrayList<TTK_User> userNameAndPasswordList = new ArrayList<>();
+    //instance creating method for making a new arraylist of users,
+    private ArrayList<TTK_User> userList = new ArrayList<>();
     
     public TTK_Users(){
-        this.userNameAndPasswordList = new ArrayList<>();
+      
     }
-    
     public TTK_Users(String userName, String password){
-	TTK_User newUser = new TTK_User(userName, password);
-        userNameAndPasswordList.add(new TTK_User(userName, password));
+        this.userName = userName;
+        this.password = password;
+        userList.add(new UserClass(userName, password));
     }
-    public String getUserName(){
-        return this.userName;
+     //add user to list method
+    public String addUserList(String userName, String password){
+        this.userName = userName;
+        this.password = password;
+         userList.add(new UserClass(userName, password));
+        return null;
     }
-    public String getPassword(){
-        return this.password;
-    }
-    public boolean doesUserInTheList(){
-	boolean userNameInList = false;
-	for (int i = 0; i < userNameAndPasswordList.size(); i++){
-			
-        if (userNameAndPasswordList.get(i).getUserName()== newUser.getUsername()){
-	System.out.println("The User name " + userNameAndPasswordList.get(i).getUsername()+ " exists");
-	
-	userNameInList = true;
-       	}else{
-            System.out.println("The user does not exist in the database");
-        break;
-        }  
-	}
+    //check if user in list method
+    public boolean checkUserName(String userName){
+        boolean userNameInList = false;
+        this.userName = userName;
+        for (int i = 0; i < userList.size(); i++){
+            if (this.userName == userList.get(i).getUserName()){
+            return true;   
+            }else{
+                return false; 
+            }
+        }
         return userNameInList;
     }
-    public boolean doesPasswordInTheList(){
-    	boolean paswordInList = false;
-	for (int i = 0; i < userNameAndPasswordList.size(); i++){
-	if (userNameAndPasswordList.get(i).getPassword() == userInfo.password()){
-	paswordInList = true;
+    public boolean checkPassword(String password){
+        boolean passwordInList = false;
+        this.password = password;
+        for (int i = 0; i < userList.size(); i++){
+            if (this.password == userList.get(i).getPassword()){
+                return true;
+            }else{
+                 return false;
+            }
         }
-        else{
-            break;
+        return passwordInList;
+    }
+    
+    //check if user in list and password correct method (login)
+    public boolean allowLogin(String userName, String password){
+        boolean allowUserLogin = false;
+        this.userName = userName;
+        this.password = password;
+        if (checkUserName(userName)==true && checkPassword(password)==true){
+           return true;
         }
-	}
-        return paswordInList;
-	}
-   
+        return allowUserLogin;
+    }
 }
-
-
