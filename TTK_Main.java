@@ -47,7 +47,7 @@ public class TTK_Main {
       }
     } else {
       //if you got here, you are already logged in
-      System.out.println("You are already logged in. ")
+      System.out.println("You are already logged in. ");
       return false;
     }
   }
@@ -94,7 +94,7 @@ public class TTK_Main {
     } else {
       //go here if none of the accepted keywords were given by the user.
       goodOption = false;
-      System.out.println("That was not one of the options available, please try again. ")
+      System.out.println("That was not one of the options available, please try again. ");
     }
     if(goodOption){
       return problemDidNotOccur;
