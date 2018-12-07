@@ -1,10 +1,15 @@
 public class TTK_Login {
-    public boolean Run(String user, String pass) {
-    	if (user.equals("tempUsername") && pass.equals("tempPassword")) {
-        	return true;
-     	
-   	} else {
-        	return false;
-    	}
+    
+	public TTK_Login() {
+		
+	}
+	public Boolean checkUsername(String tempUsername, TTK_Users userList) {
+		
+		return userlist.checkUserName(tempUsername);
+	}
+	
+	public Boolean logInUser(String tempUsername, String tempPassword, TTK_Users userList) {
+	
+		return userList.allowLogin(tempUsername, tempPassword);
 	}
 }
