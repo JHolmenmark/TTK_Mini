@@ -1,9 +1,9 @@
 
-package New_TTK_Project;
+package TTK_Project;
 
 import java.util.ArrayList;
 
-public class TTK_Users{
+public class TTK_Users {
     
     private String userName;
     private String password;
@@ -12,54 +12,56 @@ public class TTK_Users{
     private ArrayList<TTK_User> userList = new ArrayList<>();
     
     public TTK_Users(){
-      
+      this.userName = "";
+      this.password = "";
     }
-    public TTK_Users(String userName, String password){
-        this.userName = userName;
-        this.password = password;
-        userList.add(new UserClass(userName, password));
-    }
+    
      //add user to list method
-    public String addUserList(String userName, String password){
-        this.userName = userName;
-        this.password = password;
-         userList.add(new UserClass(userName, password));
-        return null;
+    public void addUserList(String userName, String password){
+        
+         this.userList.add(new TTK_User(userName, password));
     }
     //check if user in list method
     public boolean checkUserName(String userName){
-        boolean userNameInList = false;
         this.userName = userName;
+      
         for (int i = 0; i < userList.size(); i++){
-            if (this.userName == userList.get(i).getUserName()){
-            return true;   
-            }else{
-                return false; 
+            if (this.userName == userList.get(i).getUsername()){
+            return true;  
             }
         }
-        return userNameInList;
+        return false;
     }
     public boolean checkPassword(String password){
-        boolean passwordInList = false;
         this.password = password;
         for (int i = 0; i < userList.size(); i++){
             if (this.password == userList.get(i).getPassword()){
                 return true;
-            }else{
-                 return false;
             }
         }
-        return passwordInList;
+        return false;
     }
-    
     //check if user in list and password correct method (login)
     public boolean allowLogin(String userName, String password){
-        boolean allowUserLogin = false;
+       
         this.userName = userName;
         this.password = password;
-        if (checkUserName(userName)==true && checkPassword(password)==true){
+        if (checkUserName(userName) && checkPassword(password)){
            return true;
         }
-        return allowUserLogin;
+        return false;
+    }
+    public String getUsersUserName(int index){
+        
+        return this.userList.get(index).getUsername();
+    }
+    public String getUsersPassword(int index){
+        return this.userList.get(index).getUsername();
+    }
+    public void setUsersUserName(String userName){
+        this.userName = userName;
+    }
+    public void setUsersPassword(String password){
+        this.password = password;
     }
 }
