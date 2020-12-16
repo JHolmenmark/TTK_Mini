@@ -8,9 +8,24 @@ public class TTK_Main {
   private static TTK_Login loginMethods = new TTK_Login();
   private static TTK_Create createMethods = new TTK_Create();
   private static boolean goLean = true;
-  public static final String ANSI_GREEN  = "\u001B[32m";
-  public static final String ANSI_RED  = "\u001B[31m";
-  public static final String ANSI_RESET = "\u001B[0m";
+
+  public String getCurrentUsername(){
+    return currentUsername;
+  }
+  public void setCurrentUsername(String aName){
+    currentUsername = aName;
+  }
+  public String getOptionSelect(){
+    return optionSelect;
+  }
+  public String setOptionSelect(String anOption){
+    optionSelect = anOption;
+  }
+  public boolean getGoLean(){
+    return goLean;
+  }
+
+  //methods above this line are meant for testing purposes only
 
   public static void welcomeLine() {
     System.out.println("Welcome " + currentUsername + "! ");
